@@ -5,35 +5,30 @@ const { format } = require(__dirname + "/../framework/mesfonctions");
 const os = require("os");
 const moment = require("moment-timezone");
 const s = require(__dirname + "/../set");
-const more = String.fromCharCode(8206)
-const Taphere = more.repeat(4001)
+const more = String.fromCharCode(8206);
+const Taphere = more.repeat(4001);
 
 zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions) => {
-    let { ms, repondre ,prefixe,nomAuteurMessage,mybotpic} = commandeOptions;
+    let { ms, repondre, prefixe, nomAuteurMessage, mybotpic } = commandeOptions;
     let { cm } = require(__dirname + "/../framework//zokou");
     var coms = {};
     var mode = "public";
-    
+
     if ((s.MODE).toLocaleLowerCase() != "yes") {
         mode = "private";
     }
 
-
-    
-
     cm.map(async (com, index) => {
-        if (!coms[com.categorie])
-            coms[com.categorie] = [];
+        if (!coms[com.categorie]) coms[com.categorie] = [];
         coms[com.categorie].push(com.nomCom);
     });
 
     moment.tz.setDefault("Africa/Nairobi");
 
-// Créer une date et une heure en GMT
-const temps = moment().format('HH:mm:ss');
-const date = moment().format('DD/MM/YYYY');
+    const temps = moment().format('HH:mm:ss');
+    const date = moment().format('DD/MM/YYYY');
 
-let infoMsg =  `
+    let infoMsg = `
 *Hey🖐️* *${nomAuteurMessage}*
 ╭─────═━┈┈━═──━┈⊷
 ┇ 『𝐌𝐀𝐈𝐍』
@@ -52,76 +47,50 @@ let infoMsg =  `
 ┇ 💫 ᴘʀᴇғɪx: *[ ${prefixe} ]*
 ┇ ⏲️ ᴛɪᴍᴇ: ${temps}
 ┇ 📅 ᴅᴀᴛᴇ: ${date} 
-╰─────═━┈┈━═──━┈⊷
-╭─────═━┈┈━═──━┈⊷
-  『𝐒𝐔𝐏𝐏𝐎𝐑𝐓』
-  ♾️ ᴡʜᴀᴛsᴀᴘᴘ ᴄʜᴀɴɴᴇʟ
-  https://whatsapp.com/channel/0029VaZuGSxEawdxZK9CzM0Y
-  ♾️ ᴛᴇʟᴇɢʀᴀᴍ ᴄʜᴀɴɴᴇʟ
-  https://t.me/ibrahimtechai
-  ♾️ ʏᴏᴜᴛᴜʙᴇ ᴄʜᴀɴɴᴇʟ
-  https://www.youtube.com/@ibrahimaitech
-  ♾️ ɪɴsᴛᴀɢʀᴀᴍ ᴘᴀɢᴇ
-  https://www.instagram.com/ibrahimadamstech
-╰─────═━┈┈━═──━┈⊷
-> ©𝑰𝒃𝒓𝒂𝒉𝒊𝒎 𝑨𝒅𝒂𝒎𝒔\n\n`;
-    
-    
-let menuMsg = `
-‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎
-╭─────═━┈┈━═──━┈⊷
-┇ ʙᴍᴡ ᴍᴅ ᴄᴏᴍᴍᴀɴᴅ ʟɪsᴛ
-╰─────═━┈┈━═──━┈⊷\n `;
+╰─────═━┈┈━═──━┈⊷`;
 
+    const botPicUrl = mybotpic(); // This returns the bot picture URL
 
-for (const cat in coms) {
-        menuMsg += `*╭────❒* *${cat}* *❒*`;
-        for (const cmd of coms[cat]) {
-            menuMsg += `  
-*╏* ${cmd}`;
+    try {
+        if (botPicUrl.match(/\.(mp4|gif)$/i)) {
+            // If the bot picture is a video or GIF
+            await zk.sendMessage(dest, {
+                video: { url: botPicUrl },
+                caption: infoMsg,
+                footer: "*BMW MD*, developed by Ibrahim Adams",
+                gifPlayback: true,
+            }, { quoted: ms });
+        } else if (botPicUrl.match(/\.(jpeg|png|jpg)$/i)) {
+            // If the bot picture is an image
+            await zk.sendMessage(dest, {
+                image: { url: botPicUrl },
+                caption: infoMsg,
+                footer: "*BMW MD*, developed by Ibrahim Adams",
+            }, { quoted: ms });
+        } else {
+            // Default text response if no media type matches
+            repondre(infoMsg);
         }
-        menuMsg += `
-*╰─═════════════❒* \n`
+    } catch (e) {
+        console.log("🥵🥵 Error sending bot picture: " + e);
+        repondre("🥵🥵 Error sending bot picture: " + e);
     }
 
-    menuMsg += `
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-©𝑰𝒃𝒓𝒂𝒉𝒊𝒎 𝑨𝒅𝒂𝒎𝒔 𝑷𝒓𝒐𝒋𝒆𝒄𝒕
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
-▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄ `;
-
-   var lien = mybotpic();
-
-   if (lien.match(/\.(mp4|gif)$/i)) {
-    try {
-        zk.sendMessage(dest, { video: { url: lien }, caption:infoMsg + menuMsg, footer: "*BMW MD*, déveloped Ibrahim Adams" , gifPlayback : true }, { quoted: ms });
+    // Sending audio as a voice note
+    const audioPath = 'https://files.catbox.moe/bewdug.mp3'; // Path to your audio file
+    if (fs.existsSync(audioPath)) {
+        try {
+            await zk.sendMessage(dest, {
+                audio: { url: audioPath },
+                mimetype: 'audio/mpeg',
+                ptt: true, // Send as a voice note
+            }, { quoted: ms });
+        } catch (e) {
+            console.log("🥵🥵 Error sending audio as voice note: " + e);
+            repondre("🥵🥵 Error sending audio as voice note: " + e);
+        }
+    } else {
+        console.log("🥵🥵 Audio file not found at path: " + audioPath);
+        repondre("🥵🥵 Audio file not found: " + audioPath);
     }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-// Vérification pour .jpeg ou .png
-else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
-    try {
-        zk.sendMessage(dest, { image: { url: lien }, caption:infoMsg + menuMsg, footer: "Je suis *BMW MD*, déveloped Ibrahim Adams" }, { quoted: ms });
-    }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-else {
-    
-    repondre(infoMsg + menuMsg);
-    
-            
-                
-    }
-         });
-
+});
