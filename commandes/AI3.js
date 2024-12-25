@@ -107,7 +107,7 @@ zokou({ nomCom: "meni", categorie: "General" }, async (dest, zk, commandeOptions
                 }
             }
         });
-
+/***
         // Send audio with caption
         await zk.sendMessage(dest, { 
             audio: { 
@@ -130,4 +130,4 @@ zokou({ nomCom: "meni", categorie: "General" }, async (dest, zk, commandeOptions
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
     }
-});
+});**/
