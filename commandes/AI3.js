@@ -29,24 +29,14 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
     const date = moment().format('DD/MM/YYYY');
 
     let infoMsg = `
-*Hey🖐️* *${nomAuteurMessage}*
 ╭─────═━┈┈━═──━┈⊷
-┇ 『𝐌𝐀𝐈𝐍』
-┇ 🤖 ʙᴏᴛ ɴᴀᴍᴇ: *ʙᴍᴡ ᴍᴅ*
-┇ 💢 ᴛʏᴘᴇ: *ᴠ6x*
-┇ 🥷 ᴅᴇᴠ: *sɪʀ ɪʙʀᴀʜɪᴍ*
-╰─────═━┈┈━═──━┈⊷
-╭─────═━┈┈━═──━┈⊷
-┇ 『𝐒𝐘𝐒𝐓𝐄𝐌』
-┇ 📍 ᴠᴇʀꜱɪᴏɴ: *6.0.3*
-┇ 💻 ᴘʟᴀᴛғᴏʀᴍ: *${os.platform()}*
-╰─────═━┈┈━═──━┈⊷
-╭─────═━┈┈━═──━┈⊷
-┇ 『𝐌𝐎𝐃𝐄』
-┇ ⭕ ᴍᴏᴅᴇ: *${mode}*
-┇ 💫 ᴘʀᴇғɪx: *[ ${prefixe} ]*
-┇ ⏲️ ᴛɪᴍᴇ: ${temps}
-┇ 📅 ᴅᴀᴛᴇ: ${date} 
+┇ ʙᴏᴛ ɴᴀᴍᴇ: *ᴅᴜʟʟᴀʜ ᴍᴅ*
+┇ ᴍᴏᴅᴇ: *${mode}*
+┇ ᴘʀᴇғɪx: *[ ${prefixe} ]*
+┇ ᴘʟᴀᴛғᴏʀᴍ: *${os.platform()}*
+┇ ᴅᴀᴛᴇ: *${date}*
+┇ ᴛɪᴍᴇ: *${temps}*
+┇ ᴄᴀᴘᴀᴄɪᴛʏ: ${format(os.totalmem() - os.freemem())}/${format(os.totalmem())}
 ╰─────═━┈┈━═──━┈⊷`;
 
     const botPicUrl = mybotpic(); // This returns the bot picture URL
@@ -57,7 +47,7 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
             await zk.sendMessage(dest, {
                 video: { url: botPicUrl },
                 caption: infoMsg,
-                footer: "*BMW MD*, developed by Ibrahim Adams",
+                footer: "*Dullah MD*, developed by Ibrahim Adams",
                 gifPlayback: true,
             }, { quoted: ms });
         } else if (botPicUrl.match(/\.(jpeg|png|jpg)$/i)) {
@@ -65,7 +55,7 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
             await zk.sendMessage(dest, {
                 image: { url: botPicUrl },
                 caption: infoMsg,
-                footer: "*BMW MD*, developed by Ibrahim Adams",
+                footer: "*Dullah MD*, developed by Ibrahim Adams",
             }, { quoted: ms });
         } else {
             // Default text response if no media type matches
@@ -77,20 +67,15 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
     }
 
     // Sending audio as a voice note
-    const audioPath = 'https://files.catbox.moe/bewdug.mp3'; // Path to your audio file
-    if (fs.existsSync(audioPath)) {
-        try {
-            await zk.sendMessage(dest, {
-                audio: { url: audioPath },
-                mimetype: 'audio/mpeg',
-                ptt: true, // Send as a voice note
-            }, { quoted: ms });
-        } catch (e) {
-            console.log("🥵🥵 Error sending audio as voice note: " + e);
-            repondre("🥵🥵 Error sending audio as voice note: " + e);
-        }
-    } else {
-        console.log("🥵🥵 Audio file not found at path: " + audioPath);
-        repondre("🥵🥵 Audio file not found: " + audioPath);
+    const audioUrl = "https://files.catbox.moe/bewdug.mp3"; // URL to the audio file
+    try {
+        await zk.sendMessage(dest, {
+            audio: { url: audioUrl },
+            mimetype: 'audio/mpeg',
+            ptt: true, // Send as a voice note
+        }, { quoted: ms });
+    } catch (e) {
+        console.log("🥵🥵 Error sending audio as voice note: " + e);
+        repondre("🥵🥵 Error sending audio as voice note: " + e);
     }
 });
