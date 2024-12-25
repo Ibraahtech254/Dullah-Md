@@ -124,10 +124,10 @@ zokou({ nomCom: "meni", categorie: "General" }, async (dest, zk, commandeOptions
                     rendersmallThumbnail: false
                 }
             }
-        });
+        });**/
 
     } catch (e) {
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
     }
-});**/
+});
