@@ -37,7 +37,9 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
 ┇ ᴅᴀᴛᴇ: *${date}*
 ┇ ᴛɪᴍᴇ: *${temps}*
 ┇ ᴄᴀᴘᴀᴄɪᴛʏ: ${format(os.totalmem() - os.freemem())}/${format(os.totalmem())}
-╰─────═━┈┈━═──━┈⊷`;
+╰─────═━┈┈━═──━┈⊷
+
+${readmore} `; // Adding the read-more effect
 
     const botPicUrl = mybotpic(); // This returns the bot picture URL
 
@@ -64,6 +66,23 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
     } catch (e) {
         console.log("🥵🥵 Error sending bot picture: " + e);
         repondre("🥵🥵 Error sending bot picture: " + e);
+    }
+
+    // Preparing commands to display
+    let commandList = "Available Commands:\n";
+    for (let category in coms) {
+        commandList += `\n*${category}*\n`;
+        commandList += coms[category].map((cmd) => `- ${prefixe}${cmd}`).join("\n") + "\n";
+    }
+
+    // Sending commands after read-more
+    try {
+        await zk.sendMessage(dest, {
+            text: commandList,
+        }, { quoted: ms });
+    } catch (e) {
+        console.log("🥵🥵 Error sending commands: " + e);
+        repondre("🥵🥵 Error sending commands: " + e);
     }
 
     // Sending audio as a voice note
