@@ -41,6 +41,7 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
 ┇ ᴘʟᴀᴛғᴏʀᴍ: *${os.platform()}*
 ┇ ᴅᴀᴛᴇ: *${date}*
 ┇ ᴛɪᴍᴇ: *${temps}*
+┇ ᴄᴏᴍᴍᴀɴᴅs: ${cm.length}
 ┇ ᴄᴀᴘᴀᴄɪᴛʏ: ${format(os.totalmem() - os.freemem())}/${format(os.totalmem())}
 ╰─────═━┈┈━═──━┈⊷
 
